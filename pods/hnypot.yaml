@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hnypt
+spec:
+  containers:
+    - name: alpine
+      image: alpine:latest
+      ports:
+        - containerPort: 80
