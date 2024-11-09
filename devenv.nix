@@ -13,6 +13,7 @@
   languages.rust = {
     enable = true;
     components = [ "rustc" "cargo" "clippy" "rustfmt" "rust-analyzer" ];
+    channel = "stable";
   };
 
   # https://devenv.sh/scripts/
