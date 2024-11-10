@@ -14,3 +14,4 @@ A SSH HoneyPot built for research & educational purposes.
 - [ ] Step Three: Implement Watcher.
   - Implement a Watcher for the honeypot.
   - Have it save logs in MongoDB.
+  - Kill pods when exiting.
