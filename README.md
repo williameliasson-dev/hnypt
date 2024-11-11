@@ -8,7 +8,7 @@ A SSH HoneyPot built for research & educational purposes.
   - Have a pod running as the honeypot
 
 - [ ] Step Two: Setup MongoDB
-  - Setup a local instance of MongoDB
+  - Setup a pod with MongoDB
   - Have it connect to the application
 
 - [ ] Step Three: Implement Watcher.
