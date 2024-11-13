@@ -4,6 +4,8 @@ use kube::runtime::wait::await_condition;
 use kube::Api;
 use tokio::time;
 
+use crate::logger::Logger;
+
 pub enum PodTypes {
     MONGODB,
     HONEYPOT,
@@ -32,8 +34,10 @@ pub async fn assure_pod_is_running(pod_name: &str, pods_api: &Api<Pod>) -> anyho
     )
     .await?
     {
-        Ok(..) => println!("Connection to pod confirmed"),
-        Err(..) => println!("Couldn't establish connection to pod: {}", pod_name),
+        Ok(..) => Logger::info("Connection to pod established"),
+        Err(..) => {
+            Logger::error(format!("Couldn't establish connection to pod: {}", pod_name).as_str())
+        }
     }
 
     Ok(())

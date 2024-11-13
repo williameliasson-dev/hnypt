@@ -1,5 +1,6 @@
 use k8s_openapi::api::core::v1::Pod;
 use kube::{Api, Client};
+pub mod logger;
 mod pods_management;
 
 use pods_management::{get_pod_from_spec, setup_pod, PodTypes};
