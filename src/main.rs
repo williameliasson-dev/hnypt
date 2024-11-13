@@ -9,9 +9,12 @@ async fn main() -> anyhow::Result<()> {
     let client = Client::try_default().await?;
     let pods_api: Api<Pod> = Api::default_namespaced(client);
 
-    let mongodb_pod: Pod = get_pod_from_spec(&PodTypes::MONGODB).unwrap();
-    let honey_pot_pod: Pod = get_pod_from_spec(&PodTypes::HONEYPOT).unwrap();
-    setup_pod(honey_pot_pod, &pods_api).await?;
-    setup_pod(mongodb_pod, &pods_api).await?;
+    let pods_to_setup: [&PodTypes; 2] = [&PodTypes::MONGODB, &PodTypes::HONEYPOT];
+
+    for pod in pods_to_setup.iter() {
+        let pod_spec = get_pod_from_spec(pod).unwrap();
+        setup_pod(pod_spec, &pods_api).await?;
+    }
+
     Ok(())
 }
