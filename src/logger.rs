@@ -1,6 +1,7 @@
 pub struct Logger {}
 
 impl Logger {
+    // TODO: Save logs to log file
     pub fn info(msg: &str) {
         println!("INFO: {}", msg)
     }
