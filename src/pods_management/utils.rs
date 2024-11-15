@@ -24,7 +24,9 @@ pub fn get_pod_from_spec(pod_type: &PodTypes) -> anyhow::Result<Pod> {
 }
 
 pub async fn assure_pod_is_running(pod_name: &str, pods_api: &Api<Pod>) -> anyhow::Result<()> {
-    const ASSURE_CONNECTION_TIMEOUT: u64 = 15;
+    const ASSURE_CONNECTION_TIMEOUT: u64 = 120;
+
+    Logger::info(format!("Trying to establish connection with: {}", pod_name).as_str());
 
     let establish = await_condition(pods_api.clone(), pod_name, is_pod_running());
 
