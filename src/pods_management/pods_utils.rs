@@ -6,10 +6,7 @@ use tokio::time;
 
 use crate::logger::Logger;
 
-pub enum PodTypes {
-    MONGODB,
-    HONEYPOT,
-}
+use super::PodTypes;
 
 pub fn get_pod_from_spec(pod_type: &PodTypes) -> anyhow::Result<Pod> {
     let spec_content: &str = match pod_type {
@@ -17,10 +14,9 @@ pub fn get_pod_from_spec(pod_type: &PodTypes) -> anyhow::Result<Pod> {
         PodTypes::HONEYPOT => include_str!("../pods/honeypot.json"),
     };
 
-    let honey_pot_pod: Pod =
-        serde_json::from_str(&spec_content).expect("Failed to read JSON from pod spec");
+    let pod: Pod = serde_json::from_str(&spec_content).expect("Failed to read JSON from pod spec");
 
-    return Ok(honey_pot_pod);
+    return Ok(pod);
 }
 
 pub async fn assure_pod_is_running(pod_name: &str, pods_api: &Api<Pod>) -> anyhow::Result<()> {
