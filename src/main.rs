@@ -7,6 +7,8 @@ pub mod logger;
 mod pods_management;
 use pods_management::{get_pod_from_spec, setup_pod, PodTypes};
 
+mod services_management;
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let client = Client::try_default().await?;

@@ -768,6 +768,7 @@ dependencies = [
  "k8s-openapi",
  "kube",
  "mongodb",
+ "once_cell",
  "serde_json",
  "tokio",
 ]
