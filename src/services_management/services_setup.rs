@@ -16,10 +16,6 @@ pub async fn setup_service(
             assert_eq!(name, service_to_setup.name_any());
             Logger::info(format!("Service has been setup: {}", name).as_str());
         }
-        Err(kube::Error::Api(kube_error)) => {
-            assert_eq!(kube_error.code, 409);
-            Logger::warn(format!("Service already exists: {}", name).as_str());
-        }
         Err(e) => return Err(e.into()),
     }
 
