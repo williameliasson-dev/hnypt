@@ -11,7 +11,11 @@ impl MongoDB {
     pub async fn init() -> mongodb::error::Result<()> {
         dotenv().ok();
 
-        let uri = env::var("MONGODB_URI").expect("MONGODB_URI not set");
+        let uri = match env::var("MONGODB_URI") {
+            Ok(uri) => uri,
+            Err(_) => panic!("MONGODB_URI not set"),
+        };
+
         let client = Client::with_uri_str(&uri).await?;
         CLIENT.set(client).unwrap();
         Ok(())

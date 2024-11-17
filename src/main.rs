@@ -2,6 +2,8 @@ use k8s_openapi::api::core::v1::{Pod, Service};
 use kube::{Api, Client};
 
 pub mod db;
+use db::MongoDB;
+
 pub mod logger;
 
 mod pods_management;
@@ -30,6 +32,8 @@ async fn main() -> anyhow::Result<()> {
         let service_spec = get_service_from_spec(service).unwrap();
         setup_service(service_spec, &services_api).await?;
     }
+
+    MongoDB::init().await?;
 
     Ok(())
 }
