@@ -8,7 +8,7 @@ A SSH HoneyPot built for research & educational purposes.
 
   - Have a pod running as the honeypot
 
-- [ ] Step Two: Setup MongoDB
+- [x] Step Two: Setup MongoDB
 
   - Setup a pod with MongoDB
   - Setup a service for MongoDB
