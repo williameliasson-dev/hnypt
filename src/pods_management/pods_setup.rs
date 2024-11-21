@@ -30,7 +30,8 @@ pub async fn setup_pods() -> anyhow::Result<()> {
     let client = Client::try_default().await?;
     let pods_api: Api<Pod> = Api::default_namespaced(client);
 
-    let pods_to_setup: [&PodTypes; 2] = [&PodTypes::MONGODB, &PodTypes::HONEYPOT];
+    let pods_to_setup: [&PodTypes; 3] =
+        [&PodTypes::MONGODB, &PodTypes::HONEYPOT, &PodTypes::RABBITMQ];
 
     for pod in pods_to_setup.iter() {
         let pod_spec = get_pod_from_spec(pod).unwrap();

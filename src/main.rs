@@ -11,8 +11,8 @@ mod services_management;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    Services::init().await?;
     Pods::init().await?;
+    Services::init().await?;
     MongoDB::init().await?;
 
     Ok(())

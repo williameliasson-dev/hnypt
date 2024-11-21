@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  labels:
+    app: mongodb
+    type: honeypot
+spec:
+  selector:
+    app: mongodb
+    type: honeypot
+  ports:
+  - port: 27017
+    targetPort: 27017
+    nodePort: 30017
+  type: NodePort
