@@ -9,9 +9,9 @@ use super::PodTypes;
 
 pub fn get_pod_from_spec(pod_type: &PodTypes) -> anyhow::Result<Pod> {
     let spec_content: &str = match pod_type {
-        PodTypes::MONGODB => include_str!("../specs/pods/mongodb.yaml"),
-        PodTypes::HONEYPOT => include_str!("../specs/pods/honeypot.yaml"),
-        PodTypes::RABBITMQ => include_str!("../specs/pods/rabbitmq.yaml"),
+        PodTypes::MONGODB => include_str!("../manifests/pods/mongodb.yaml"),
+        PodTypes::HONEYPOT => include_str!("../manifests/pods/honeypot.yaml"),
+        PodTypes::RABBITMQ => include_str!("../manifests/pods/rabbitmq.yaml"),
     };
 
     let pod: Pod = serde_yml::from_str(&spec_content).expect("Failed to read JSON from pod spec");

@@ -16,10 +16,6 @@ async fn setup_pod(pod_to_setup: Pod, pods_api: &Api<Pod>) -> anyhow::Result<()>
             Logger::info(format!("Pod has been setup: {}", name).as_str());
             assure_pod_is_running(&name, pods_api).await?;
         }
-        Err(kube::Error::Api(kube_error)) => {
-            assert_eq!(kube_error.code, 409);
-            Logger::warn(format!("Pod already exists: {}", name).as_str());
-        }
         Err(e) => return Err(e.into()),
     }
 
