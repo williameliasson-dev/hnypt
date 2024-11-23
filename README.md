@@ -17,6 +17,8 @@ A SSH HoneyPot built for research & educational purposes.
 - [ ] Step Three: Implement Watcher.
   - Setup RabbitMQ.
   - Setup P & C for logs
+
+- [ ] Step Four: Implement Watcher.
   - Implement a Watcher for the honeypot.
   - Have it save logs in MongoDB via RabbitMQ.
   - Fix persistent volume for RabbitMQ & MongoDB.
