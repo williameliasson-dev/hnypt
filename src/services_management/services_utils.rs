@@ -4,8 +4,8 @@ use super::ServicesTypes;
 
 pub fn get_service_from_spec(service_type: &ServicesTypes) -> anyhow::Result<Service> {
     let spec_content: &str = match service_type {
-        ServicesTypes::MONGODB => include_str!("../manifests/services/mongodb-service.yaml"),
-        ServicesTypes::RABBITMQ => include_str!("../manifests/services/rabbitmq-service.yaml"),
+        ServicesTypes::MONGODB => include_str!("../manifests/services/mongodb-nodeport.yaml"),
+        ServicesTypes::RABBITMQ => include_str!("../manifests/services/rabbitmq-nodeport.yaml"),
     };
 
     let service: Service =
