@@ -21,7 +21,9 @@ async fn setup_service(
         Err(kube::Error::Api(kube_error)) => {
             // Syntax is understandable but failed to setup..
             if kube_error.reason == "Invalid" && kube_error.code == 422 {
-                Logger::warn(format!("Pod already exists: {}", name).as_str());
+                Logger::warn(
+                    format!("Service failed to setup but syntax is correct: {}", name).as_str(),
+                );
             } else {
                 return Err(kube_error.into());
             }
@@ -36,7 +38,8 @@ pub async fn setup_services() -> anyhow::Result<()> {
     let client = Client::try_default().await?;
     let services_api: Api<Service> = Api::default_namespaced(client);
 
-    let services_to_setup: [&ServicesTypes; 1] = [&ServicesTypes::MONGODB];
+    let services_to_setup: [&ServicesTypes; 2] =
+        [&ServicesTypes::MONGODB, &ServicesTypes::RABBITMQ];
 
     for service in services_to_setup.iter() {
         let service_spec = get_service_from_spec(service).unwrap();
