@@ -18,6 +18,14 @@ async fn setup_service(
             assert_eq!(name, service_to_setup.name_any());
             Logger::info(format!("Service has been setup: {}", name).as_str());
         }
+        Err(kube::Error::Api(kube_error)) => {
+            // Syntax is understandable but failed to setup..
+            if kube_error.reason == "Invalid" && kube_error.code == 422 {
+                Logger::warn(format!("Pod already exists: {}", name).as_str());
+            } else {
+                return Err(kube_error.into());
+            }
+        }
         Err(e) => return Err(e.into()),
     }
 
