@@ -1,20 +1,20 @@
+use crate::logger::Logger;
 use k8s_openapi::api::core::v1::Pod;
 use kube::runtime::conditions::is_pod_running;
 use kube::runtime::wait::await_condition;
 use kube::Api;
 use tokio::time;
 
-use crate::logger::Logger;
-
 use super::PodTypes;
 
 pub fn get_pod_from_spec(pod_type: &PodTypes) -> anyhow::Result<Pod> {
     let spec_content: &str = match pod_type {
-        PodTypes::MONGODB => include_str!("../specs/pods/mongodb.json"),
-        PodTypes::HONEYPOT => include_str!("../specs/pods/honeypot.json"),
+        PodTypes::MONGODB => include_str!("../manifests/pods/mongodb.yaml"),
+        PodTypes::HONEYPOT => include_str!("../manifests/pods/honeypot.yaml"),
+        PodTypes::RABBITMQ => include_str!("../manifests/pods/rabbitmq.yaml"),
     };
 
-    let pod: Pod = serde_json::from_str(&spec_content).expect("Failed to read JSON from pod spec");
+    let pod: Pod = serde_yml::from_str(&spec_content).expect("Failed to read JSON from pod spec");
 
     return Ok(pod);
 }
